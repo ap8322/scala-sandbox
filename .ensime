@@ -1,0 +1,26 @@
+(
+ :root-dir "/Users/yuki/sbt"
+ :cache-dir "/Users/yuki/sbt/.ensime_cache"
+ :scala-compiler-jars ("/Users/yuki/.ivy2/cache/org.scala-lang/scala-compiler/jars/scala-compiler-2.11.8.jar" "/Users/yuki/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.11.8.jar" "/Users/yuki/.ivy2/cache/org.scala-lang/scala-reflect/jars/scala-reflect-2.11.8.jar" "/Users/yuki/.ivy2/cache/org.scala-lang/scalap/jars/scalap-2.11.8.jar")
+ :name "sbt"
+ :java-home "/Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home"
+ :java-flags ("-Xss2m" "-Xms1024m" "-Xmx1024m" "-XX:ReservedCodeCacheSize=128m" "-XX:MaxMetaspaceSize=256m")
+ :java-compiler-args nil
+ :reference-source-roots ("/Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/src.zip")
+ :scala-version "2.11.8"
+ :compiler-args ("-deprecation" "-feature" "-unchecked" "-Xlint" "-Yinline-warnings" "-Yno-adapted-args" "-Ywarn-dead-code" "-Ywarn-numeric-widen" "-Xfuture" "-Ywarn-unused-import" "-Ymacro-expand:discard")
+ :formatting-prefs nil
+ :disable-source-monitoring nil
+ :disable-class-monitoring nil
+ :subprojects ((
+   :name "sbt"
+   :source-roots ("/Users/yuki/sbt/src/main/scala" "/Users/yuki/sbt/src/test/scala")
+   :targets ("/Users/yuki/sbt/target/scala-2.11/classes")
+   :test-targets ("/Users/yuki/sbt/target/scala-2.11/test-classes")
+   :depends-on-modules nil
+   :compile-deps ("/Users/yuki/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.11.8.jar")
+   :runtime-deps nil
+   :test-deps nil
+   :doc-jars ("/Users/yuki/sbt/target/scala-2.11/sbt_2.11-0.1-SNAPSHOT-javadoc.jar" "/Users/yuki/.ivy2/cache/org.scala-lang/scala-library/docs/scala-library-2.11.8-javadoc.jar")
+   :reference-source-roots ("/Users/yuki/.ivy2/cache/org.scala-lang/scala-library/srcs/scala-library-2.11.8-sources.jar")))
+)
