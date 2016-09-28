@@ -31,6 +31,9 @@ class Rational(n: Int, d: Int) extends Ordered[Rational]{
   override def toString = numer + "/" + denom
   private def gcd(a: Int, b: Int): Int =
     if(b == 0) a else gcd(b,a%b)
+  private def test(): Unit = {
+
+  }
 
   def compare(that: Rational) =
     (this.numer * that.denom) - (that.numer * this.denom)

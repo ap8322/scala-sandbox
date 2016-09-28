@@ -4,7 +4,7 @@
 		module="scala_2.10"
 		revision="0.1-SNAPSHOT"
 		status="integration"
-		publication="20160911011213"
+		publication="20160925161356"
 	>
 		<description>
 		scala
@@ -24,6 +24,7 @@
 		<conf name="docs" visibility="public" description=""/>
 		<conf name="pom" visibility="public" description=""/>
 		<conf name="scala-tool" visibility="private" description=""/>
+		<conf name="ensime-internal" visibility="private" description=""/>
 	</configurations>
 	<publications>
 		<artifact name="scala_2.10" type="pom" ext="pom" conf="pom"/>
@@ -32,7 +33,12 @@
 		<artifact name="scala_2.10" type="doc" ext="jar" conf="docs" e:classifier="javadoc"/>
 	</publications>
 	<dependencies>
+		<dependency org="org.scala-lang" name="scala-compiler" rev="2.10.6" transitive="false" conf="ensime-internal->default(compile)"/>
 		<dependency org="org.scala-lang" name="scala-compiler" rev="2.10.6" conf="scala-tool->default,optional(default)"/>
-		<dependency org="org.scala-lang" name="scala-library" rev="2.10.6" conf="scala-tool->default,optional(default);compile->default(compile)"/>
+		<dependency org="org.scala-lang" name="scala-library" rev="2.10.6" transitive="false" conf="ensime-internal->default(compile)"/>
+		<dependency org="org.scala-lang" name="scala-library" rev="2.10.6" conf="compile->default(compile)"/>
+		<dependency org="org.scala-lang" name="scala-library" rev="2.10.6" conf="scala-tool->default,optional(default)"/>
+		<dependency org="org.scala-lang" name="scala-reflect" rev="2.10.6" transitive="false" conf="ensime-internal->default(compile)"/>
+		<dependency org="org.scala-lang" name="scalap" rev="2.10.6" transitive="false" conf="ensime-internal->default(compile)"/>
 	</dependencies>
 </ivy-module>

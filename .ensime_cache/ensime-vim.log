@@ -1,9 +1,1 @@
-INFO     <2016-09-12 02:30:51,438> (client.py:81) - Initializing project - /Users/yuki/sbt
-WARNING  <2016-09-12 02:30:52,265> (protocol.py:61) - Response has not been handled: 
-{u'implementation': {u'name': u'ENSIME'},
- u'typehint': u'ConnectionInfo',
- u'version': u'1.0'}
-WARNING  <2016-09-12 02:38:30,759> (protocol.py:61) - Response has not been handled: 
-{u'typehint': u'ClearAllScalaNotesEvent'}
-WARNING  <2016-09-12 02:38:33,738> (protocol.py:61) - Response has not been handled: 
-{u'typehint': u'ClearAllScalaNotesEvent'}
+INFO     <2016-09-27 00:34:10,058> (client.py:81) - Initializing project - /Users/yuki/sbt
