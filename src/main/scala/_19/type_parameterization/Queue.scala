@@ -24,5 +24,9 @@ object Queue {
   }
 
   def enqueue(x: T): QueueImpl[T] = new QueueImpl(leading, x :: trailing)
+
+
  }
 }
+
+

@@ -1,0 +1,28 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+traittest.BasicIntQueue	src/main/scala/traittest.BasicIntQueue.scala	/^class traittest.BasicIntQueue extends traittest.IntQueue {$/;"	c
+traittest.Doubling	src/main/scala/traittest.Doubling.scala	/^trait traittest.Doubling extends traittest.IntQueue {$/;"	t
+traittest.Filtering	src/main/scala/traittest.Incrementing.scala	/^trait traittest.Filtering extends traittest.IntQueue {$/;"	t
+Frog	src/main/scala/Frog.scala	/^class Frog extends Philosophical {$/;"	c
+HelloWorld	src/main/scala/HelloWorld.scala	/^object HelloWorld {$/;"	c
+traittest.Incrementing	src/main/scala/traittest.Incrementing.scala	/^trait traittest.Incrementing extends traittest.IntQueue {$/;"	t
+traittest.IntQueue	src/main/scala/traittest.IntQueue.scala	/^abstract class traittest.IntQueue {$/;"	c
+Philosophical	src/main/scala/Philosophical.scala	/^trait Philosophical {$/;"	t
+Rational	src/main/scala/Rational.scala	/^class Rational(n: Int, d: Int) extends Ordered[Rational]{$/;"	c
+User	src/main/scala/User.scala	/^class User(val name: String, val age: Int)$/;"	c
+User	src/main/scala/User.scala	/^object User {$/;"	c
+compare	src/main/scala/Rational.scala	/^  def compare(that: Rational) =$/;"	m
+denom	src/main/scala/Rational.scala	/^  val denom = d \/ g $/;"	l
+get	src/main/scala/traittest.BasicIntQueue.scala	/^  def get() = buf.remove(0)$/;"	m
+get	src/main/scala/traittest.IntQueue.scala	/^  def get(): Int$/;"	m
+main	src/main/scala/HelloWorld.scala	/^  def main(args: Array[String]): Unit = {$/;"	m
+numer	src/main/scala/Rational.scala	/^  val numer = n \/ g$/;"	l
+philosophize	src/main/scala/Philosophical.scala	/^  def philosophize() {$/;"	m
+printUser	src/main/scala/User.scala	/^  def printUser(user: User) = println(user.name + " " + user.age)$/;"	m
+put	src/main/scala/traittest.BasicIntQueue.scala	/^  def put(x: Int) { buf += x}$/;"	m
+put	src/main/scala/traittest.IntQueue.scala	/^  def put(x: Int)$/;"	m
+this	src/main/scala/Rational.scala	/^  def this(n: Int) = this(n,1)$/;"	m
