@@ -11,7 +11,7 @@ class Rational(n: Int, d: Int) extends Ordered[Rational]{
       denom * that.denom
     )
 
-  def + (i: Int):Rational = 
+  def + (i: Int):Rational =
     new Rational(numer + i * denom, denom)
   def - (that: Rational): Rational = 
     new Rational(

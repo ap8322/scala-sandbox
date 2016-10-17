@@ -1,98 +1,15 @@
 [0m[[0mdebug[0m] [0m[naha] [0m
 [0m[[0mdebug[0m] [0m[naha] Initial source changes: [0m
 [0m[[0mdebug[0m] [0m[naha] 	removed:Set()[0m
-[0m[[0mdebug[0m] [0m[naha] 	added: Set(/Users/yuki/sbt/src/main/scala/MyList.scala, /Users/yuki/sbt/src/main/scala/tptest.scala, /Users/yuki/sbt/src/main/scala/Philosophical.scala, /Users/yuki/sbt/src/main/scala/Frog.scala, /Users/yuki/sbt/src/main/scala/User.scala, /Users/yuki/sbt/src/main/scala/maxLength.scala, /Users/yuki/sbt/src/main/scala/HelloWorld.scala, /Users/yuki/sbt/src/main/scala/Calc.scala, /Users/yuki/sbt/src/main/scala/Rational.scala)[0m
+[0m[[0mdebug[0m] [0m[naha] 	added: Set()[0m
 [0m[[0mdebug[0m] [0m[naha] 	modified: Set()[0m
 [0m[[0mdebug[0m] [0m[naha] Invalidated products: Set()[0m
 [0m[[0mdebug[0m] [0m[naha] External API changes: API Changes: Set()[0m
 [0m[[0mdebug[0m] [0m[naha] Modified binary dependencies: Set()[0m
-[0m[[0mdebug[0m] [0m[naha] Initial directly invalidated sources: Set(/Users/yuki/sbt/src/main/scala/MyList.scala, /Users/yuki/sbt/src/main/scala/tptest.scala, /Users/yuki/sbt/src/main/scala/Philosophical.scala, /Users/yuki/sbt/src/main/scala/Frog.scala, /Users/yuki/sbt/src/main/scala/User.scala, /Users/yuki/sbt/src/main/scala/maxLength.scala, /Users/yuki/sbt/src/main/scala/HelloWorld.scala, /Users/yuki/sbt/src/main/scala/Calc.scala, /Users/yuki/sbt/src/main/scala/Rational.scala)[0m
+[0m[[0mdebug[0m] [0m[naha] Initial directly invalidated sources: Set()[0m
 [0m[[0mdebug[0m] [0m[naha] [0m
 [0m[[0mdebug[0m] [0m[naha] Sources indirectly invalidated by:[0m
 [0m[[0mdebug[0m] [0m[naha] 	product: Set()[0m
 [0m[[0mdebug[0m] [0m[naha] 	binary dep: Set()[0m
 [0m[[0mdebug[0m] [0m[naha] 	external source: Set()[0m
-[0m[[0mdebug[0m] [0mAll initially invalidated sources: Set(/Users/yuki/sbt/src/main/scala/MyList.scala, /Users/yuki/sbt/src/main/scala/tptest.scala, /Users/yuki/sbt/src/main/scala/Philosophical.scala, /Users/yuki/sbt/src/main/scala/Frog.scala, /Users/yuki/sbt/src/main/scala/User.scala, /Users/yuki/sbt/src/main/scala/maxLength.scala, /Users/yuki/sbt/src/main/scala/HelloWorld.scala, /Users/yuki/sbt/src/main/scala/Calc.scala, /Users/yuki/sbt/src/main/scala/Rational.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/Users/yuki/sbt/src/main/scala/MyList.scala, /Users/yuki/sbt/src/main/scala/tptest.scala, /Users/yuki/sbt/src/main/scala/Philosophical.scala, /Users/yuki/sbt/src/main/scala/Frog.scala, /Users/yuki/sbt/src/main/scala/User.scala, /Users/yuki/sbt/src/main/scala/maxLength.scala, /Users/yuki/sbt/src/main/scala/HelloWorld.scala, /Users/yuki/sbt/src/main/scala/Calc.scala, /Users/yuki/sbt/src/main/scala/Rational.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] Recompiling all 9 sources: invalidated sources (9) exceeded 50.0% of all sources[0m
-[0m[[0minfo[0m] [0mCompiling 9 Scala sources to /Users/yuki/sbt/src/main/scala/target/scala-2.10/classes...[0m
-[0m[[0mdebug[0m] [0mGetting org.scala-sbt:compiler-interface:0.13.12:component from component compiler for Scala 2.10.6[0m
-[0m[[0mdebug[0m] [0mGetting org.scala-sbt:compiler-interface:0.13.12:component from component compiler for Scala 2.10.6[0m
-[0m[[0mdebug[0m] [0mRunning cached compiler 11abd37, interfacing (CompilerInterface) with Scala compiler version 2.10.6[0m
-[0m[[0mdebug[0m] [0mCalling Scala compiler with arguments  (CompilerInterface):[0m
-[0m[[0mdebug[0m] [0m	-bootclasspath[0m
-[0m[[0mdebug[0m] [0m	/Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/jre/classes:/Users/yuki/.sbt/boot/scala-2.10.6/lib/scala-library.jar[0m
-[0m[[0mdebug[0m] [0m	-classpath[0m
-[0m[[0mdebug[0m] [0m	/Users/yuki/sbt/src/main/scala/target/scala-2.10/classes[0m
-[0m[[0mdebug[0m] [0mScala compilation took 5.701781977 s[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating /Users/yuki/sbt/src/main/scala/maxLength.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating (transitively) by inheritance from /Users/yuki/sbt/src/main/scala/maxLength.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/Users/yuki/sbt/src/main/scala/maxLength.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidated by transitive inheritance dependency: Set(/Users/yuki/sbt/src/main/scala/maxLength.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] The /Users/yuki/sbt/src/main/scala/maxLength.scala source file has the following regular definitions changed:[0m
-[0m[[0mdebug[0m] [0m[naha] 	.[0m
-[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating /Users/yuki/sbt/src/main/scala/Rational.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating (transitively) by inheritance from /Users/yuki/sbt/src/main/scala/Rational.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/Users/yuki/sbt/src/main/scala/Rational.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidated by transitive inheritance dependency: Set(/Users/yuki/sbt/src/main/scala/Rational.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] The /Users/yuki/sbt/src/main/scala/Rational.scala source file has the following regular definitions changed:[0m
-[0m[[0mdebug[0m] [0m[naha] 	notify, wait, *, <=, $asInstanceOf, equals, asInstanceOf, <, synchronized, $isInstanceOf, >=, numer, notifyAll, compareTo, -, isInstanceOf, <init>, ==, clone, $init$, toString, denom, +, !=, getClass, Rational, ne, eq, compare, /, >, ##, finalize, hashCode.[0m
-[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating /Users/yuki/sbt/src/main/scala/tptest.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating (transitively) by inheritance from /Users/yuki/sbt/src/main/scala/tptest.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/Users/yuki/sbt/src/main/scala/tptest.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidated by transitive inheritance dependency: Set(/Users/yuki/sbt/src/main/scala/tptest.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] The /Users/yuki/sbt/src/main/scala/tptest.scala source file has the following regular definitions changed:[0m
-[0m[[0mdebug[0m] [0m[naha] 	notify, wait, $asInstanceOf, equals, asInstanceOf, synchronized, $isInstanceOf, Base, notifyAll, isInstanceOf, <init>, ==, Bar, clone, Foo, Super, Sub, toString, Item, !=, getClass, ne, eq, ##, finalize, hashCode.[0m
-[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating /Users/yuki/sbt/src/main/scala/Calc.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating (transitively) by inheritance from /Users/yuki/sbt/src/main/scala/Calc.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/Users/yuki/sbt/src/main/scala/Calc.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidated by transitive inheritance dependency: Set(/Users/yuki/sbt/src/main/scala/Calc.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] The /Users/yuki/sbt/src/main/scala/Calc.scala source file has the following regular definitions changed:[0m
-[0m[[0mdebug[0m] [0m[naha] 	notify, wait, $asInstanceOf, equals, asInstanceOf, synchronized, $isInstanceOf, div, notifyAll, Calc, isInstanceOf, <init>, ==, isPrime, clone, toString, !=, getClass, ne, eq, sum, ##, finalize, hashCode.[0m
-[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating /Users/yuki/sbt/src/main/scala/Frog.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating (transitively) by inheritance from /Users/yuki/sbt/src/main/scala/Frog.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/Users/yuki/sbt/src/main/scala/Frog.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidated by transitive inheritance dependency: Set(/Users/yuki/sbt/src/main/scala/Frog.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] The /Users/yuki/sbt/src/main/scala/Frog.scala source file has the following regular definitions changed:[0m
-[0m[[0mdebug[0m] [0m[naha] 	notify, wait, $asInstanceOf, equals, Frog, philosophize, asInstanceOf, synchronized, $isInstanceOf, notifyAll, isInstanceOf, <init>, ==, clone, $init$, toString, !=, getClass, ne, eq, ##, finalize, hashCode.[0m
-[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating /Users/yuki/sbt/src/main/scala/Philosophical.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating (transitively) by inheritance from /Users/yuki/sbt/src/main/scala/Philosophical.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/Users/yuki/sbt/src/main/scala/Philosophical.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] Including /Users/yuki/sbt/src/main/scala/Frog.scala by /Users/yuki/sbt/src/main/scala/Philosophical.scala[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidated by transitive inheritance dependency: Set(/Users/yuki/sbt/src/main/scala/Philosophical.scala, /Users/yuki/sbt/src/main/scala/Frog.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] The /Users/yuki/sbt/src/main/scala/Philosophical.scala source file has the following regular definitions changed:[0m
-[0m[[0mdebug[0m] [0m[naha] 	Philosophical, notify, wait, $asInstanceOf, equals, philosophize, asInstanceOf, synchronized, $isInstanceOf, notifyAll, isInstanceOf, <init>, ==, clone, $init$, toString, !=, getClass, ne, eq, ##, finalize, hashCode.[0m
-[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
-[0m[[0mdebug[0m] [0m[naha] The following modified names cause invalidation of /Users/yuki/sbt/src/main/scala/Frog.scala: Set(Philosophical, <init>)[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating /Users/yuki/sbt/src/main/scala/HelloWorld.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating (transitively) by inheritance from /Users/yuki/sbt/src/main/scala/HelloWorld.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/Users/yuki/sbt/src/main/scala/HelloWorld.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidated by transitive inheritance dependency: Set(/Users/yuki/sbt/src/main/scala/HelloWorld.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] The /Users/yuki/sbt/src/main/scala/HelloWorld.scala source file has the following regular definitions changed:[0m
-[0m[[0mdebug[0m] [0m[naha] 	notify, wait, $asInstanceOf, equals, asInstanceOf, synchronized, $isInstanceOf, main, notifyAll, isInstanceOf, ==, clone, toString, !=, HelloWorld, getClass, ne, eq, ##, finalize, hashCode.[0m
-[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating /Users/yuki/sbt/src/main/scala/User.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating (transitively) by inheritance from /Users/yuki/sbt/src/main/scala/User.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/Users/yuki/sbt/src/main/scala/User.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidated by transitive inheritance dependency: Set(/Users/yuki/sbt/src/main/scala/User.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] The /Users/yuki/sbt/src/main/scala/User.scala source file has the following regular definitions changed:[0m
-[0m[[0mdebug[0m] [0m[naha] 	notify, name, wait, $asInstanceOf, equals, asInstanceOf, synchronized, $isInstanceOf, age, notifyAll, isInstanceOf, <init>, ==, clone, User, toString, !=, getClass, ne, eq, ##, finalize, hashCode, printUser.[0m
-[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating /Users/yuki/sbt/src/main/scala/MyList.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating (transitively) by inheritance from /Users/yuki/sbt/src/main/scala/MyList.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/Users/yuki/sbt/src/main/scala/MyList.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidated by transitive inheritance dependency: Set(/Users/yuki/sbt/src/main/scala/MyList.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] The /Users/yuki/sbt/src/main/scala/MyList.scala source file has the following regular definitions changed:[0m
-[0m[[0mdebug[0m] [0m[naha] 	.[0m
-[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
-[0m[[0mdebug[0m] [0m[naha] New invalidations:[0m
-[0m[[0mdebug[0m] [0m[naha] 	Set()[0m
-[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set()[0m
-[0m[[0mdebug[0m] [0m[naha] Previously invalidated, but (transitively) depend on new invalidations:[0m
-[0m[[0mdebug[0m] [0m[naha] 	Set()[0m
-[0m[[0mdebug[0m] [0m[naha] All newly invalidated sources after taking into account (previously) recompiled sources:Set()[0m
+[0m[[0mdebug[0m] [0mAll initially invalidated sources: Set()[0m
