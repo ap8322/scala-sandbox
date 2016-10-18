@@ -13,18 +13,24 @@ sealed trait MyList[+A]{
     else prefix.head :: prefix.tail ::: this
   }
 
+  def fold = ???
+
+  val f = (x: Int) => x * 2
+
   final def length: Int =
     if(isEmpty) 0 else 1 + tail.length
 
   final def filter(f:A => Boolean): MyList[A] = {
     if(isEmpty) MyNil
     else{
+      // パターンマッチ
       if(f(this.head)) this.head :: tail.filter(f)
       else tail.filter(f)
     }
   }
 
   final def map[U](f:A => U): MyList[U] =
+    // 再帰でやる｡
     if(isEmpty) MyNil
     else f(head) :: tail.map(f)
 
