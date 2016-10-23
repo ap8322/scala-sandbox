@@ -1,15 +1,11 @@
 package com.modoki
 
 import scala.annotation.tailrec
-import scala.collection
-import scala.collection.BitSet
-
 
 abstract class AbstractMyList[+A] {
   def map[B](f: A => B): AbstractMyList[B]
   def foldLeft[B](z: B)(f: (B, A) => B): B
   def foldRight[B](z: B)(f: (A, B) => B): B
-  BitSet
 }
 
 sealed trait MyList[+A] extends AbstractMyList[A] {
@@ -45,10 +41,11 @@ sealed trait MyList[+A] extends AbstractMyList[A] {
     }
   }
 
+  @tailrec
   final def foldRight[B](z: B)(f: (A, B) => B): B = {
     this match {
       case MyNil => z
-      case MyCons(h, t) => t.foldRight(f(h, z))(f)
+      case mc: MyCons[A] => mc.init.foldRight(f(mc.last,z))(f)
     }
   }
 
@@ -56,7 +53,7 @@ sealed trait MyList[+A] extends AbstractMyList[A] {
   final def flatMap[B](f: A => MyList[B]): MyList[B] = foldLeft[MyList[B]](MyNil) { (acc, xs) => acc ::: f(xs) }
   final def withFilter(f: A => Boolean): WithFilter = new WithFilter(f)
 
-  final class WithFilter(f: A => Boolean) {
+  final class WithFilter (f: A => Boolean) {
     def map[U](fn: A => U): MyList[U] = self filter f map fn
     def flatMap[U](fn: A => MyList[U]): MyList[U] = self filter f flatMap fn
     def foreach(fn: A => Unit): Unit = self filter f foreach fn

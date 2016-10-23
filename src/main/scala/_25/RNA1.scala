@@ -4,7 +4,7 @@ class RNA1 private (val groups: Array[Int],val length: Int) extends IndexedSeq[B
   import RNA1._
   def apply(idx: Int): Base = {
     if (idx < 0 || length <= idx) throw new IndexOutOfBoundsException
-    Base.formInt(groups(idx / n) >> (idx % N * S) & M)
+    Base.formInt(groups(idx / N) >> (idx % N * S) & M)
   }
 }
 
