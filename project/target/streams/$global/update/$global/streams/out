@@ -10668,7 +10668,7 @@
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-sbt#apply-macro;0.13.12!apply-macro.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-lang#jline;2.10.6!jline.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.fusesource.jansi#jansi;1.4!jansi.jar[0m
-[0m[[0mdebug[0m] [0m:: resolution report :: resolve 2594ms :: artifacts dl 54ms[0m
+[0m[[0mdebug[0m] [0m:: resolution report :: resolve 1829ms :: artifacts dl 37ms[0m
 [0m[[0mdebug[0m] [0m	report for default#sbt-build;0.1-SNAPSHOT compile produced in /Users/yuki/sbt/project/target/resolution-cache/reports/default-sbt-build-compile.xml[0m
 [0m[[0mdebug[0m] [0m	report for default#sbt-build;0.1-SNAPSHOT runtime produced in /Users/yuki/sbt/project/target/resolution-cache/reports/default-sbt-build-runtime.xml[0m
 [0m[[0mdebug[0m] [0m	report for default#sbt-build;0.1-SNAPSHOT test produced in /Users/yuki/sbt/project/target/resolution-cache/reports/default-sbt-build-test.xml[0m
@@ -10683,5 +10683,5 @@
 [0m[[0mdebug[0m] [0m	report for default#sbt-build;0.1-SNAPSHOT pom produced in /Users/yuki/sbt/project/target/resolution-cache/reports/default-sbt-build-pom.xml[0m
 [0m[[0mdebug[0m] [0m	report for default#sbt-build;0.1-SNAPSHOT scala-tool produced in /Users/yuki/sbt/project/target/resolution-cache/reports/default-sbt-build-scala-tool.xml[0m
 [0m[[0mdebug[0m] [0m	report for default#sbt-build;0.1-SNAPSHOT ensime-internal produced in /Users/yuki/sbt/project/target/resolution-cache/reports/default-sbt-build-ensime-internal.xml[0m
-[0m[[0mdebug[0m] [0m	resolve done (2594ms resolve - 54ms download)[0m
+[0m[[0mdebug[0m] [0m	resolve done (1829ms resolve - 37ms download)[0m
 [0m[[0minfo[0m] [0mDone updating.[0m
