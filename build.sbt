@@ -1,6 +1,8 @@
 // build.sbt
 scalaVersion := "2.11.8"
 
+name := "scala learn"
+
 scalacOptions ++= Seq("-deprecation", "-feature", "-unchecked", "-Xlint")
 
 libraryDependencies ++= Seq(

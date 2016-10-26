@@ -16,7 +16,8 @@ sealed trait MyList[+A] extends AbstractMyList[A] {
 
   final def ::[B >: A](x: B): MyList[B] = MyCons(x, this)
   final def :::[B >: A](that: MyList[B]): MyList[B] = foldLeft(that) { (acc, xs) => acc + xs }
-  final def +[B >: A](x: B): MyList[B] = (x :: this.reverse).reverse
+  final def +[B >: A](x: B): MyList[B] = foldRight[MyList[B]](MyCons(x,MyNil)){ (xs,acc) => xs :: acc}
+//  final def +[B >: A](x: B): MyList[B] = (x :: this.reverse).reverse
 
   final def init: MyList[A] = {
     @tailrec
@@ -41,6 +42,10 @@ sealed trait MyList[+A] extends AbstractMyList[A] {
     }
   }
 
+  // 処理の最初と最後を考える｡
+  // Trampoline recursion
+  // cps continuation passing style
+  // cont
   @tailrec
   final def foldRight[B](z: B)(f: (A, B) => B): B = {
     this match {
@@ -121,3 +126,18 @@ object MyList {
     if (x.isEmpty) MyNil
     else MyCons(x.head, apply(x.tail: _*))
 }
+
+case class Cont[A, B](run: (A => B) => B) {
+  def map[C](f: A => C): Cont[C, B] = {
+    Cont {
+      k => run(a => k(f(a)))
+    }
+  }
+
+  def flatMap[C](f: A => Cont[C, B]): Cont[C, B] = {
+    ???
+  }
+
+}
+
+// option の実装
