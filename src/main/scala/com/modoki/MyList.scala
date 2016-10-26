@@ -46,13 +46,17 @@ sealed trait MyList[+A] extends AbstractMyList[A] {
   // Trampoline recursion
   // cps continuation passing style
   // cont
-  @tailrec
-  final def foldRight[B](z: B)(f: (A, B) => B): B = {
-    this match {
-      case MyNil => z
-      case mc: MyCons[A] => mc.init.foldRight(f(mc.last,z))(f)
-    }
-  }
+  //@tailrec
+  //  final def foldRight[B](z: B)(f: (A, B) => B): B = {
+  //    def loop(xs: MyList[A], acc: B => B = x => x): B => B = xs match {
+  //      case MyNil => acc
+  //      case MyCons(h,t) => loop(t,x => acc(f(h,x)))
+  //    }
+  //
+  //    loop(this)(z)
+  //  }
+
+  final def foldRight[B](z: B)(f: (A,B) => B): B = foldLeft((x:B) => x){ (acc, xs) => x => acc(f(xs,x))}(z)
 
   final def map[B](f: A => B): MyList[B] = foldLeft[MyList[B]](MyNil) { (acc, xs) => f(xs) :: acc }.reverse
   final def flatMap[B](f: A => MyList[B]): MyList[B] = foldLeft[MyList[B]](MyNil) { (acc, xs) => acc ::: f(xs) }
@@ -139,5 +143,3 @@ case class Cont[A, B](run: (A => B) => B) {
   }
 
 }
-
-// option の実装
