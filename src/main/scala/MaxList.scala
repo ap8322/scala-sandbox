@@ -1,6 +1,3 @@
-/**
-  * Created by yuki on 2016/10/06.
-  */
 object MaxList {
   def maxListImpParam[T](elem: List[T])(implicit orderer: T => Ordered[T]): T = {
     elem match {
