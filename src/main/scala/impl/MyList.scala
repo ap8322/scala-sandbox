@@ -1,4 +1,4 @@
-package com.modoki
+package impl
 
 import scala.annotation.tailrec
 

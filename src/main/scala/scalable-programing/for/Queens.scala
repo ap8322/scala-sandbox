@@ -1,6 +1,3 @@
-/**
-  * Created by yuki on 2016/10/16.
-  */
 class Queens {
  def queens(n: Int): List[List[(Int,Int)]] = {
   def placeQueens(k: Int):List[List[(Int,Int)]] = {
