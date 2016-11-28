@@ -13,7 +13,6 @@ class MyServer {
       .foreach { socket =>
         new Thread() {
           override def run() = {
-            Thread.sleep(3000)
             request(socket)
           }
         }.start()
@@ -26,7 +25,21 @@ class MyServer {
       out <- Using(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream, StandardCharsets.UTF_8)))
     } {
       printRequestHeader(in)
+      out.write("HTTP/1.1 200 OK\n")
+      out.write("content-Type: text/html; charset=UTF-8\n")
+      out.write("Server: MyServer\n")
+      out.write("\n")
+      out.write("<!DOCTYPE html>")
+      out.write("<html lang='ja'>")
+      out.write("<head>")
+      out.write("<meta charset='UTF-8'>")
+      out.write("<title>test</title>")
+      out.write("</head>")
+      out.write("<body>")
       out.write("<h1>hello world</h1>")
+      out.write("</body>")
+      out.write("</html>")
+      out.write("\n")
     }
   }
 
