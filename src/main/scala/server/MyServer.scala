@@ -20,9 +20,9 @@ class MyServer {
   private def routes(socket: Socket) = {
     for {
       r <- Using(new BufferedReader(new InputStreamReader(socket.getInputStream, StandardCharsets.UTF_8)))
-      w <- Using(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream, StandardCharsets.UTF_8)))
+      w <- Using(new BufferedOutputStream(socket.getOutputStream))
     } {
-      implicit val out: BufferedWriter = w
+      implicit val out: BufferedOutputStream = w
       val reqLine = getRequestLine(r.readLine)
 
       reqLine.path match {
@@ -40,22 +40,22 @@ class MyServer {
       .foreach(println)
   }
 
-  private def createHTML()(implicit out: BufferedWriter) = {
-      out.write("HTTP/1.1 200 OK\n")
-      out.write("content-Type: text/html; charset=UTF-8\n")
-      out.write("Server: MyServer\n")
-      out.write("\n")
-      out.write("<!DOCTYPE html>")
-      out.write("<html lang='ja'>")
-      out.write("<head>")
-      out.write("<meta charset='UTF-8'>")
-      out.write("<title>test</title>")
-      out.write("</head>")
-      out.write("<body>")
-      out.write("<h1>hello world</h1>")
-      out.write("</body>")
-      out.write("</html>")
-      out.write("\n")
+  private def createHTML()(implicit out: BufferedOutputStream) = {
+      out.write("HTTP/1.1 200 OK\n".getBytes)
+      out.write("content-Type: text/html; charset=UTF-8\n".getBytes)
+      out.write("Server: MyServer\n".getBytes)
+      out.write("\n".getBytes)
+      out.write("<!DOCTYPE html>".getBytes)
+      out.write("<html lang='ja'>".getBytes)
+      out.write("<head>".getBytes)
+      out.write("<meta charset='UTF-8'>".getBytes)
+      out.write("<title>test</title>".getBytes)
+      out.write("</head>".getBytes)
+      out.write("<body>".getBytes)
+      out.write("<h1>hello world</h1>".getBytes)
+      out.write("</body>".getBytes)
+      out.write("</html>".getBytes)
+      out.write("\n".getBytes)
   }
 
   private def notFound()(implicit out: BufferedOutputStream) = {
@@ -76,26 +76,25 @@ class MyServer {
       out.write("\n".getBytes)
   }
 
-  private def createImageResponse()(implicit out: BufferedWriter) = {
+  private def createImageResponse()(implicit out: BufferedOutputStream) = {
       // imageデータを取ってくる
       val image = new File("/tmp/test.jpeg")
-      val br = new BufferedReader(new InputStreamReader(new FileInputStream(image)))
-      val buffer = new Array[Char](256)
+      val br = new BufferedInputStream(new FileInputStream(image))
+      val buffer = new Array[Byte](256)
       var len = 0
 
-      out.write("HTTP/1.1 200 OK\n")
-      out.write("content-Type: text/jpeg\n")
-      out.write("content-Length: "+ 100000 +"\n")
-      out.write("Server: MyServer\n")
-      out.write("\n")
+      out.write("HTTP/1.1 200 OK\n".getBytes)
+      out.write("Content-Type: image/jpeg\n".getBytes)
+      out.write("Content-Length: 100\n".getBytes)
+      out.write("Server: MyServer\n".getBytes)
+      out.write("\n".getBytes)
 
       while(len == -1){
         len = br.read(buffer)
-        println(len)
         out.write(buffer,0,len)
       }
 
-      out.write("\n")
+      out.write("\n".getBytes)
   }
 
   case class StatusLine(method: String, path: String, version: String)
