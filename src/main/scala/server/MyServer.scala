@@ -29,6 +29,7 @@ class MyServer {
       reqLine.path match {
         case "/"      => createHTML()
         case "/image" => createImageResponse()
+        case "/html" => createHTMLResponse()
         case _        => notFound()
       }
     }
@@ -77,11 +78,15 @@ class MyServer {
       out.write("\n".getBytes)
   }
 
+  private def createResponseHeader(res: ResponseInfo)(implicit out: BufferedOutputStream) = {}
+
+  case class ResponseInfo(status: String, contentType: String, contentLength: String)
+
   private def createImageResponse()(implicit out: BufferedOutputStream) = {
       val image = new File("/tmp/test.jpeg")
       val bytes = Files.readAllBytes(image.toPath)
 
-      val len = file.length.toString.getBytes
+      val len = image.length.toString.getBytes
 
       out.write("HTTP/1.1 200 OK\n".getBytes)
       out.write("Content-Type: image/jpeg\n".getBytes)
@@ -92,6 +97,26 @@ class MyServer {
       out.write("\n".getBytes)
 
       out.write(bytes)
+
+      out.write("\n".getBytes)
+  }
+
+  private def createHTMLResponse()(implicit out: BufferedOutputStream) = {
+      val file = new File("/tmp/index.html")
+      //Fileインスタンスからcontent-typeを認識したい。
+      //outputに関しては基本BufferedOutputStreamで対応可能
+      val content = Files.readAllBytes(file.toPath)
+      val contentLength = file.length.toString.getBytes
+
+      out.write("HTTP/1.1 200 OK\n".getBytes)
+      out.write("content-Type: text/html; charset=UTF-8\n".getBytes)
+      out.write("Content-Length: ".getBytes)
+      out.write(contentLength)
+      out.write("\n".getBytes)
+      out.write("Server: MyServer\n".getBytes)
+      out.write("\n".getBytes)
+
+      out.write(content)
 
       out.write("\n".getBytes)
   }
