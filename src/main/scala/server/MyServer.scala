@@ -26,12 +26,8 @@ class MyServer {
       implicit val out: BufferedOutputStream = w
       val reqLine = getRequestLine(r.readLine)
 
-      reqLine.path match {
-        case "/"      => createHTML()
-        case "/image" => createImageResponse()
-        case "/html" => createHTMLResponse()
-        case _        => notFound()
-      }
+      createResponse(reqLine.path)
+
     }
   }
 
@@ -80,45 +76,53 @@ class MyServer {
 
   private def createResponseHeader(res: ResponseInfo)(implicit out: BufferedOutputStream) = {}
 
-  case class ResponseInfo(status: String, contentType: String, contentLength: String)
+  private def createResponse(path: String)(implicit out: BufferedOutputStream) = {
+      val base_dir = "/tmp"
+      val CRLF = Array(13,10)
 
-  private def createImageResponse()(implicit out: BufferedOutputStream) = {
-      val image = new File("/tmp/test.jpeg")
-      val bytes = Files.readAllBytes(image.toPath)
+      val file = new File(base_dir + path)
+      val content = Files.readAllBytes(file.toPath)
 
-      val len = image.length.toString.getBytes
-
-      out.write("HTTP/1.1 200 OK\n".getBytes)
-      out.write("Content-Type: image/jpeg\n".getBytes)
-      out.write("Content-Length: ".getBytes)
-      out.write(len)
-      out.write("\n".getBytes)
-      out.write("Server: MyServer\n".getBytes)
-      out.write("\n".getBytes)
-
-      out.write(bytes)
-
-      out.write("\n".getBytes)
+      out.write("HTTP/1.1 200 OK".getBytes)
+      out.write(CRLF)
+      out.write(getContentType(file))
+      out.write(CRLF)
+      out.write(getContentLength(file))
+      out.write(CRLF)
+      out.write("Server: MyServer".getBytes)
+      out.write(CRLF)
+      out.write(CRLF)
+      out.write(content)
+      out.write(CRLF)
   }
 
-  private def createHTMLResponse()(implicit out: BufferedOutputStream) = {
-      val file = new File("/tmp/index.html")
-      //Fileインスタンスからcontent-typeを認識したい。
-      //outputに関しては基本BufferedOutputStreamで対応可能
-      val content = Files.readAllBytes(file.toPath)
-      val contentLength = file.length.toString.getBytes
+  private def getFileExtension(fileName: Strng) = {
+    fileName.lastIndexOf('.') match {
+      case i if i > 0 => fileName.substring(i+1)
+      case _ => "plain"
+    }
+  }
 
-      out.write("HTTP/1.1 200 OK\n".getBytes)
-      out.write("content-Type: text/html; charset=UTF-8\n".getBytes)
-      out.write("Content-Length: ".getBytes)
-      out.write(contentLength)
-      out.write("\n".getBytes)
-      out.write("Server: MyServer\n".getBytes)
-      out.write("\n".getBytes)
+  private def getContentType(file: File) = {
+      val ex = getFileExtension(file.getName)
+      val textType = List("html","css","plain")
+      val imageType = List("jpeg","png","gif")
 
-      out.write(content)
+      val key = "Content-Type"
+      val value = ex match {
+        case ct if textType.exists(x => x = ct) => "text/" + ct + "; charset=UTF-8"
+        case ct if imageType.exists(x => x = ct) => "image/" + ct
+      }
 
-      out.write("\n".getBytes)
+      (key + ": " + value).getBytes
+
+  }
+
+  private def getContentLength(file: File) = {
+      val len = file.length.toString.getBytes
+      val key = "Content-Length"
+
+      (key + ": " len).getBytes
   }
 
   case class StatusLine(method: String, path: String, version: String)
