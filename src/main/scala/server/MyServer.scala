@@ -3,6 +3,7 @@ package simpleHttpServer
 import java.io._
 import java.net.{ServerSocket, Socket}
 import java.nio.charset.StandardCharsets
+import java.nio.file._
 
 class MyServer {
   def start(ss: ServerSocket) = {
@@ -77,22 +78,20 @@ class MyServer {
   }
 
   private def createImageResponse()(implicit out: BufferedOutputStream) = {
-      // imageデータを取ってくる
       val image = new File("/tmp/test.jpeg")
-      val br = new BufferedInputStream(new FileInputStream(image))
-      val buffer = new Array[Byte](256)
-      var len = 0
+      val bytes = Files.readAllBytes(image.toPath)
+
+      val len = file.length.toString.getBytes
 
       out.write("HTTP/1.1 200 OK\n".getBytes)
       out.write("Content-Type: image/jpeg\n".getBytes)
-      out.write("Content-Length: 100\n".getBytes)
+      out.write("Content-Length: ".getBytes)
+      out.write(len)
+      out.write("\n".getBytes)
       out.write("Server: MyServer\n".getBytes)
       out.write("\n".getBytes)
 
-      while(len == -1){
-        len = br.read(buffer)
-        out.write(buffer,0,len)
-      }
+      out.write(bytes)
 
       out.write("\n".getBytes)
   }
