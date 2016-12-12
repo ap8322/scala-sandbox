@@ -38,24 +38,6 @@ class MyServer {
       .foreach(println)
   }
 
-  private def createHTML()(implicit out: BufferedOutputStream) = {
-      out.write("HTTP/1.1 200 OK\n".getBytes)
-      out.write("content-Type: text/html; charset=UTF-8\n".getBytes)
-      out.write("Server: MyServer\n".getBytes)
-      out.write("\n".getBytes)
-      out.write("<!DOCTYPE html>".getBytes)
-      out.write("<html lang='ja'>".getBytes)
-      out.write("<head>".getBytes)
-      out.write("<meta charset='UTF-8'>".getBytes)
-      out.write("<title>test</title>".getBytes)
-      out.write("</head>".getBytes)
-      out.write("<body>".getBytes)
-      out.write("<h1>hello world</h1>".getBytes)
-      out.write("</body>".getBytes)
-      out.write("</html>".getBytes)
-      out.write("\n".getBytes)
-  }
-
   private def notFound()(implicit out: BufferedOutputStream) = {
       out.write("HTTP/1.1 404 NotFound\n".getBytes)
       out.write("content-Type: text/html; charset=UTF-8\n".getBytes)
@@ -74,29 +56,34 @@ class MyServer {
       out.write("\n".getBytes)
   }
 
-  private def createResponseHeader(res: ResponseInfo)(implicit out: BufferedOutputStream) = {}
-
   private def createResponse(path: String)(implicit out: BufferedOutputStream) = {
-      val base_dir = "/tmp"
-      val CRLF = Array(13,10)
+      val BASE_DIR = "/tmp/public"
+      val CRLF = "\r\n".getBytes
+      try{
+        val file = path match {
+          case p if p.endsWith("/") => new File(BASE_DIR + path + "index.html")
+          case _  => new File(BASE_DIR + path)
+        }
 
-      val file = new File(base_dir + path)
-      val content = Files.readAllBytes(file.toPath)
+        val content = Files.readAllBytes(file.toPath)
 
-      out.write("HTTP/1.1 200 OK".getBytes)
-      out.write(CRLF)
-      out.write(getContentType(file))
-      out.write(CRLF)
-      out.write(getContentLength(file))
-      out.write(CRLF)
-      out.write("Server: MyServer".getBytes)
-      out.write(CRLF)
-      out.write(CRLF)
-      out.write(content)
-      out.write(CRLF)
+        out.write("HTTP/1.1 200 OK".getBytes)
+        out.write(CRLF)
+        out.write(getContentType(file))
+        out.write(CRLF)
+        out.write(getContentLength(file))
+        out.write(CRLF)
+        out.write("Server: MyServer".getBytes)
+        out.write(CRLF)
+        out.write(CRLF)
+        out.write(content)
+        out.write(CRLF)
+      } catch {
+          case e:NoSuchFileException => notFound()
+      }
   }
 
-  private def getFileExtension(fileName: Strng) = {
+  private def getFileExtension(fileName: String) = {
     fileName.lastIndexOf('.') match {
       case i if i > 0 => fileName.substring(i+1)
       case _ => "plain"
@@ -110,8 +97,8 @@ class MyServer {
 
       val key = "Content-Type"
       val value = ex match {
-        case ct if textType.exists(x => x = ct) => "text/" + ct + "; charset=UTF-8"
-        case ct if imageType.exists(x => x = ct) => "image/" + ct
+        case ct if textType.exists(x => x == ct) => "text/" + ct + "; charset=UTF-8"
+        case ct if imageType.exists(x => x == ct)=> "image/" + ct
       }
 
       (key + ": " + value).getBytes
@@ -119,10 +106,10 @@ class MyServer {
   }
 
   private def getContentLength(file: File) = {
-      val len = file.length.toString.getBytes
+      val length = file.length.toString
       val key = "Content-Length"
 
-      (key + ": " len).getBytes
+      (key + ": " + length).getBytes
   }
 
   case class StatusLine(method: String, path: String, version: String)
