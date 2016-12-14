@@ -57,31 +57,45 @@ class MyServer {
   }
 
   private def createResponse(path: String)(implicit out: BufferedOutputStream) = {
-      val BASE_DIR = "/tmp/public"
-      val CRLF = "\r\n".getBytes
-      try{
-        val file = path match {
-          case p if p.endsWith("/") => new File(BASE_DIR + path + "index.html")
-          case _  => new File(BASE_DIR + path)
+
+      getRequestFile(path) match {
+        case None => notFound()
+        case Some(file) => {
+          val CRLF = "\r\n".getBytes
+
+          val content = Files.readAllBytes(file.toPath)
+
+          out.write("HTTP/1.1 200 OK".getBytes)
+          out.write(CRLF)
+          out.write(getContentType(file))
+          out.write(CRLF)
+          out.write(getContentLength(file))
+          out.write(CRLF)
+          out.write("Server: MyServer".getBytes)
+          out.write(CRLF)
+          out.write(CRLF)
+          out.write(content)
+          out.write(CRLF)
         }
-
-        val content = Files.readAllBytes(file.toPath)
-
-        out.write("HTTP/1.1 200 OK".getBytes)
-        out.write(CRLF)
-        out.write(getContentType(file))
-        out.write(CRLF)
-        out.write(getContentLength(file))
-        out.write(CRLF)
-        out.write("Server: MyServer".getBytes)
-        out.write(CRLF)
-        out.write(CRLF)
-        out.write(content)
-        out.write(CRLF)
-      } catch {
-          case e:NoSuchFileException => notFound()
       }
   }
+
+  private def getRequestFile(path: String): Option[java.io.File] = {
+    val BASE_DIR = "/tmp/public"
+
+    val file = path match {
+      case p if p.endsWith("/") => new File(BASE_DIR + path + "index.html")
+      case _  => new File(BASE_DIR + path)
+    }
+
+    if(file.exists) {
+      Some(file)
+    } else {
+      None
+    }
+  }
+
+  // TODO responseHelper traitに処理を切り出す。
 
   private def getFileExtension(fileName: String) = {
     fileName.lastIndexOf('.') match {
