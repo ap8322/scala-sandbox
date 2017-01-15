@@ -16,6 +16,6 @@ object IOTest {
     os.write(image)
     os.flush
     os.close
-
  }
 }
+
