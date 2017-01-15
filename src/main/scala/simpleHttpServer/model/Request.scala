@@ -11,7 +11,8 @@ import scala.util.control.Breaks.break
 import simpleHttpServer.utils.Conf.CRLF_STR
 import simpleHttpServer.utils.Conf.BASE_DIR
 
-case class Request(status:StatusLine,resource: Option[Resource],metaData: Option[Seq[Map[String,String]]] = None,body: Option[Array[Byte]] = None)
+// あとでmetadata,body,method の case classを作る
+case class Request(status:StatusLine,resource: Option[Resource],metaData: Option[Seq[Map[String,String]]] = None,body: Option[Seq[Map[String,String]]] = None)
 
 object Request {
   def apply(in: InputStream): Request = {
@@ -31,19 +32,36 @@ object Request {
     }
   }
 
-  private def parseRequest(in: InputStream): (String,Seq[Map[String,String]]) = {
+  private def parseRequest(in: InputStream): (String,Seq[Map[String,String]],Option[Seq[Map[String,String]]]) = {
     val request = new String(readRequest(in))
 
     val ar = request.split(CRLF_STR + CRLF_STR).toSeq
 
     val header = ar.head.split(CRLF_STR).toSeq
-    //val body = ar.last.getBytes
+
+    // val body = parseBody(ar.last)
+    val body = None
+
 
     val metaData = header.tail.map { data =>
       val a = data.split(": ")
       Map(a.head -> a(1))
     }
-    (header.head,metaData)
+    (header.head,metaData,body)
+  }
+
+  private def parseBody(body: String): Option[Seq[Map[String,String]]] = {
+    body match {
+      case bo if bo eq "" => None
+      case bo => {
+        Some(
+          bo.split("&").toSeq.map{b =>
+            val v = b.split("=").toSeq
+            Map(v.head -> v(1))
+          }
+        )
+      }
+    }
   }
 
   private def readRequest(in: InputStream): Array[Byte] = {
@@ -61,15 +79,6 @@ object Request {
     }
 
     list.flatten.toArray
-  }
-
-  private def readBody(in: InputStream) = {
-    println("reader")
-    val bytes = new Array[Byte](2)
-
-    println("read")
-    println(in.read(bytes))
-    print("read!")
   }
 
   private def getRequestResource(status: StatusLine): Option[Resource] = {
