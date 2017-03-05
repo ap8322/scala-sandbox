@@ -15,7 +15,11 @@ case class Resource(content: Array[Byte],contentType: ContentType,length: Long) 
 
 object Resource {
   def apply(file: java.io.File): Resource = {
-    new Resource(getContent(file),ContentType(getFileExtension(file.getName)),file.length)
+    new Resource(
+      getContent(file),
+      ContentType(getFileExtension(file.getName)),
+      file.length
+    )
   }
 
   // TODO あとで書き直す

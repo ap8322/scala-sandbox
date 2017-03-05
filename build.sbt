@@ -1,7 +1,7 @@
 // build.sbt
 scalaVersion := "2.11.8"
 
-name := "scala learn"
+name := "scala sandbox"
 
 scalacOptions ++= Seq("-deprecation", "-feature", "-unchecked", "-Xlint")
 

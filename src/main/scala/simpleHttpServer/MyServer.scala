@@ -3,7 +3,7 @@ package simpleHttpServer
 import java.io._
 import java.net.{ServerSocket, Socket}
 
-import simpleHttpServer.model.{Request, Response}
+import simpleHttpServer.model.{Request, RequestMethod, Response}
 import simpleHttpServer.utils.Conf.CRLF
 import simpleHttpServer.utils.Using
 
@@ -27,21 +27,31 @@ class MyServer {
       out <- Using(new BufferedOutputStream(socket.getOutputStream))
     } {
       val request =  Request(in)
-      val response: Response = Response(request)
+      val response = Response(request)
+
+      // formで送られてきたデータ確認用。
+      request.body.foreach{
+        case (k,v) => println(k + " => " + v)
+      }
 
       out.write(response.status.getResponseStatusLine)
       out.write(CRLF)
-      out.write(response.resource.getContentType)
-      out.write(CRLF)
-      out.write(response.resource.getContentLength)
-      out.write(CRLF)
+
+      if(request.status.method == RequestMethod.Get || request.status.method == RequestMethod.Head){
+        out.write(response.resource.getContentType)
+        out.write(CRLF)
+        out.write(response.resource.getContentLength)
+        out.write(CRLF)
+      }
+
       out.write(response.getServerName)
       out.write(CRLF)
       out.write(CRLF)
 
-      if(request.status.method != "HEAD"){
+      if(request.status.method == RequestMethod.Get){
         out.write(response.resource.content)
       }
+
       out.write(CRLF)
     }
   }

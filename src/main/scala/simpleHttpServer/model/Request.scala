@@ -1,64 +1,44 @@
 package simpleHttpServer.model
 
 import java.io._
-import java.nio.charset.StandardCharsets
-import java.util
 
 import scala.collection.mutable.ListBuffer
-import scala.util.control.Breaks.breakable
-import scala.util.control.Breaks.break
+import scala.util.control.Breaks.{break, breakable}
 
-import simpleHttpServer.utils.Conf.CRLF_STR
-import simpleHttpServer.utils.Conf.BASE_DIR
+import simpleHttpServer.utils.Conf.{BASE_DIR, CRLF_STR}
 
-// あとでmetadata,body,method の case classを作る
-case class Request(status:StatusLine,resource: Option[Resource],metaData: Option[Seq[Map[String,String]]] = None,body: Option[Seq[Map[String,String]]] = None)
+case class Request(
+                    status:StatusLine,
+                    metaData: Map[String,String] = Map.empty,
+                    body: Map[String,String] = Map.empty
+                  )
 
 object Request {
+  type Metadata = Map[String,String]
+  type RequestBody = Map[String,String]
+
   def apply(in: InputStream): Request = {
-    val header = parseRequest(in)
-    val status = getRequestStatusLine(header._1)
-
-    status.method match {
-      case "GET" | "HEAD" => new Request(status, getRequestResource(status))
-      case "POST" => ???
-      case "PUT" => ???
-    }
-  }
-
-  private def getRequestStatusLine(line: String): StatusLine = {
-    line.split("\\s+") match {
-      case Array(s1, s2, s3) => StatusLine(s1, s2, s3)
-    }
-  }
-
-  private def parseRequest(in: InputStream): (String,Seq[Map[String,String]],Option[Seq[Map[String,String]]]) = {
     val request = new String(readRequest(in))
 
-    val ar = request.split(CRLF_STR + CRLF_STR).toSeq
+    request.split(CRLF_STR + CRLF_STR) match {
+      case Array(header,body) => {
+        val (statusLine,metadata) = parseRequestHeader(header)
+        val bodyParse = parseRequestBody(body)
 
-    val header = ar.head.split(CRLF_STR).toSeq
+        new Request(
+          statusLine,
+          metadata,
+          bodyParse
+        )
 
-    // val body = parseBody(ar.last)
-    val body = None
+      }
+      case Array(header) => {
+        val (statusLine,metadata) = parseRequestHeader(header)
 
-
-    val metaData = header.tail.map { data =>
-      val a = data.split(": ")
-      Map(a.head -> a(1))
-    }
-    (header.head,metaData,body)
-  }
-
-  private def parseBody(body: String): Option[Seq[Map[String,String]]] = {
-    body match {
-      case bo if bo eq "" => None
-      case bo => {
-        Some(
-          bo.split("&").toSeq.map{b =>
-            val v = b.split("=").toSeq
-            Map(v.head -> v(1))
-          }
+        new Request(
+          statusLine,
+          metadata,
+          Map.empty[String,String]
         )
       }
     }
@@ -80,6 +60,32 @@ object Request {
 
     list.flatten.toArray
   }
+
+  private def parseRequestHeader(header: String):(StatusLine,Metadata) = {
+    val headers = header.split(CRLF_STR)
+
+    val statusLine = StatusLine(headers.head)
+    val metadatas =  headers.tail
+
+    val metaMap = metadatas.foldLeft(Map.empty[String,String]) { (acc,data) =>
+      data.split(": ") match {
+        case Array(key,value) => acc + (key -> value)
+        case _ => acc
+      }
+    }
+
+    (statusLine,metaMap)
+  }
+
+  private def parseRequestBody(body: String): RequestBody = {
+    body.split("&").foldLeft(Map.empty[String,String]){(acc, b) =>
+      b.split("=") match {
+        case Array(k,v) => acc + (k -> v)
+        case _ => acc
+      }
+    }
+  }
+
 
   private def getRequestResource(status: StatusLine): Option[Resource] = {
     val file = status.path match {

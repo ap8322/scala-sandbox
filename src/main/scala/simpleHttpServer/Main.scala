@@ -7,7 +7,7 @@ object Main {
     val serverSocket = new ServerSocket
     serverSocket.bind(new InetSocketAddress(8080))
 
-    val server = new MyServer()
+    val server = new MyServer
     server.start(serverSocket)
   }
 }
