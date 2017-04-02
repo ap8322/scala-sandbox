@@ -31,6 +31,19 @@ sealed trait MyList[+A] extends AbstractMyList[A] {
   }
   final def last: A = this.reverse.head
 
+  final def map2[B](f:A => B): MyList[B] = {
+    // target がどんどん短くなり、accがどんどん形成されていく
+    // targetが空MyNilになった時、accを返す。
+    def loop(target: MyList[A],acc: MyList[B] = MyNil): MyList[B] = {
+      target match {
+        case MyNil => acc
+        case MyCons(head,tail) => loop(tail,f(head) :: acc)
+      }
+    }
+
+    loop(this)
+  }
+
   final def reverse: MyList[A] = foldLeft[MyList[A]](MyNil) { (acc, xs) => xs :: acc }
   final def filter(f: A => Boolean): MyList[A] = foldLeft[MyList[A]](MyNil) { (acc, xs) => if (f(xs)) xs :: acc else acc }.reverse
 
