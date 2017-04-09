@@ -10,6 +10,8 @@ libraryDependencies ++= Seq(
   "mysql" % "mysql-connector-java" % "6.0.6"
 )
 
+initialCommands in console := "import impl._"
+
 lazy val hello = taskKey[Unit]("An example task")
 
 lazy val root = (project in file(".")).

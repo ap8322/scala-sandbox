@@ -1,6 +1,10 @@
 package impl
 
 import scala.annotation.tailrec
+import scala.AnyRef
+import scala.collection.{AbstractSeq, LinearSeq}
+import scala.collection.immutable.List
+import scala.util.control.TailCalls
 
 abstract class AbstractMyList[+A] {
   def map[B](f: A => B): AbstractMyList[B]
@@ -8,8 +12,9 @@ abstract class AbstractMyList[+A] {
   def foldRight[B](z: B)(f: (A, B) => B): B
 }
 
-sealed trait MyList[+A] extends AbstractMyList[A] {
+sealed trait MyList[+A] {
   self =>
+  def length: Int
   def isEmpty: Boolean
   def head: A
   def tail: MyList[A]
@@ -44,16 +49,28 @@ sealed trait MyList[+A] extends AbstractMyList[A] {
     loop(this)
   }
 
-  final def reverse: MyList[A] = foldLeft[MyList[A]](MyNil) { (acc, xs) => xs :: acc }
+  // final def reverse: MyList[A] = foldLeft[MyList[A]](MyNil) { (acc, xs) => xs :: acc }
+  final def reverse: MyList[A] = {
+    def loop(xs: MyList[A],acc: MyList[A] = MyNil):MyList[A] = { xs match {
+      case MyNil => acc
+      case MyCons(h,t) => MyCons(h,acc)
+
+    }
+
+    }
+
+  }
   final def filter(f: A => Boolean): MyList[A] = foldLeft[MyList[A]](MyNil) { (acc, xs) => if (f(xs)) xs :: acc else acc }.reverse
 
-  @tailrec
-  final def foldLeft[B](z: B)(f: (B, A) => B): B = {
-    this match {
-      case MyNil => z
-      case MyCons(h, t) => t.foldLeft(f(z, h))(f)
-    }
-  }
+   @tailrec
+   final def foldLeft[B](z: B)(f: (B, A) => B): B = {
+     this match {
+       case MyNil => z
+       case MyCons(h, t) => t.foldLeft(f(z, h))(f)
+     }
+   }
+
+
 
   // 処理の最初と最後を考える｡
   // Trampoline recursion
@@ -67,8 +84,25 @@ sealed trait MyList[+A] extends AbstractMyList[A] {
   //      case MyCons(h,t) => loop(t,x => acc(f(h,x)))
   //    }
   //
+  // List(1,2,3,4,5).foldRight(0)((x,acc) => x + acc)
+  // (1,(2,3,4,5)) => loop((2,3,4,5), x => f(1,x))
+  // (2,(3,4,5) => loop((3,4,5), x => f(1,f(2,x)))
+  // (3,(4,5) => loop((4,5), x => f(1,f(2,f(3,f(4,f(5,x)))))
+  //
+  //
   //    loop(this)(z)
   //  }
+
+  final def foldr[B](z: B)(f: (A, B) => B): B = {
+    def loop(as: MyList[A],z:B)(f: (A,B) => B): B = {
+      as match {
+        case MyNil => z
+        case MyCons(x,xs) => f(x,loop(xs,z)(f))
+      }
+    }
+
+    loop(this,z)(f)
+  }
 
   final def foldRight[B](z: B)(f: (A,B) => B): B = foldLeft((x:B) => x){ (acc, xs) => x => acc(f(xs,x))}(z)
 
@@ -128,21 +162,31 @@ sealed trait MyList[+A] extends AbstractMyList[A] {
 }
 
 case object MyNil extends MyList[Nothing] {
-  def isEmpty: Boolean = true
-  def head: Nothing = throw new NoSuchElementException("head of empty MyList")
-  def tail: MyList[Nothing] = throw new UnsupportedOperationException("tail of empty MyList")
+  override def length = 0
+  override def isEmpty: Boolean = true
+  override def head: Nothing = throw new NoSuchElementException("head of empty MyList")
+  override def tail: MyList[Nothing] = throw new UnsupportedOperationException("tail of empty MyList")
 }
 
 final case class MyCons[B](hd: B, tl: MyList[B]) extends MyList[B] {
-  def isEmpty: Boolean = false
-  def head: B = hd
-  def tail: MyList[B] = tl
+  override def length: Int = 1 + tl.length
+  override def isEmpty: Boolean = false
+  override def head: B = hd
+  override def tail: MyList[B] = tl
+
 }
 
 object MyList {
-  def apply[A](x: A*): MyList[A] =
-    if (x.isEmpty) MyNil
-    else MyCons(x.head, apply(x.tail: _*))
+//  def apply[A](x: A*): MyList[A] =
+//    if (x.isEmpty) MyNil
+//    else MyCons(x.head, apply(x.tail: _*))
+  def apply[A](as : A*) : MyList[A] = {
+    def loop(k : MyList[A] => MyList[A], xs : Seq[A]) : MyList[A] =
+      if (xs.isEmpty) k(MyNil)
+      else loop(x => k(MyCons(xs.head, x)), xs.tail)
+
+    loop(x => x, as)
+  }
 }
 
 case class Cont[A, B](run: (A => B) => B) {
