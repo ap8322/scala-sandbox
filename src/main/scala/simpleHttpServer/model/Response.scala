@@ -15,6 +15,7 @@ case class Response(
 
 object Response {
 
+  // impliciit parametar
   def apply(request: Request): Response = {
     request.status.method match {
       case Get | Head => {
@@ -30,6 +31,7 @@ object Response {
   }
 
   private def getRequestResource(status: StatusLine): Option[Resource] = {
+    // TODO ディレクトリ名で終わってもindex.htmlでもやる｡ 再帰的にやるといい｡
     val file = status.path match {
       case p if p.endsWith("/") => new File(BASE_DIR + p + "index.html")
       case p  => new File(BASE_DIR + p)

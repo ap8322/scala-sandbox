@@ -8,8 +8,10 @@ case class StatusLine(
 
 object StatusLine {
   def apply(line: String): StatusLine = {
+    //
     line.split(" ") match {
       case Array(s1, s2, s3) => new StatusLine(RequestMethod(s1), s2, s3)
+      // case arr => new Exception("") // リクエストが悪いのか｡サーバー側の問題なのか
     }
   }
 }

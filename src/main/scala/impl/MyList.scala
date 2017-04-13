@@ -45,6 +45,7 @@ sealed trait MyList[+A] extends AbstractMyList[A] {
   // 処理の最初と最後を考える｡
   // Trampoline recursion
   // cps continuation passing style
+  // Free モナド
   // cont
   //@tailrec
   //  final def foldRight[B](z: B)(f: (A, B) => B): B = {

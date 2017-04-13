@@ -18,6 +18,11 @@ object Request {
   type RequestBody = Map[String,String]
 
   def apply(in: InputStream): Request = {
+    // memo applyでかすぎると切り分けがちゃんとできていない｡
+    // 高階関数で
+    // 先にstatuslineを見て処理を分岐させる｡
+    // おかしい奴は400
+    //TODO  Stringに変換せずにやりたい｡
     val request = new String(readRequest(in))
 
     request.split(CRLF_STR + CRLF_STR) match {
@@ -45,6 +50,7 @@ object Request {
   }
 
   private def readRequest(in: InputStream): Array[Byte] = {
+    // readerを使う
     var list = ListBuffer[Array[Byte]]()
     val read = new Array[Byte](1024)
 
