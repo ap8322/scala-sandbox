@@ -1,4 +1,4 @@
-package simpleHttpServer
+package simpleHttpServer.utils
 
 import java.io.Closeable
 
