@@ -1,15 +1,16 @@
 package com.modoki
 
+import impl.MyList
 import org.scalatest._
 
 class MyListSpec extends FlatSpec {
   val target = MyList(1, 2, 3)
 
-  "+" should "work like List" in {
-    val expect = MyList(1,2,3,4)
-    val actual = target + 4
-    assert(expect === actual)
-  }
+//  "+" should "work like List" in {
+//    val expect = MyList(1,2,3,4)
+//    val actual = target + 4
+//    assert(expect === actual)
+//  }
 
   "map" should "work like List" in {
     val expect = MyList(2, 4, 6)
@@ -29,17 +30,17 @@ class MyListSpec extends FlatSpec {
     assert(expect === actual)
   }
 
-  "last" should "work like List" in {
-    val expect = 3
-    val actual = target.last
-    assert(expect === actual)
-  }
-
-  "init" should "work like List" in {
-    val expect = MyList(1,2)
-    val actual = target.init
-    assert(expect === actual)
-  }
+//  "last" should "work like List" in {
+//    val expect = 3
+//    val actual = target.last
+//    assert(expect === actual)
+//  }
+//
+//  "init" should "work like List" in {
+//    val expect = MyList(1,2)
+//    val actual = target.init
+//    assert(expect === actual)
+//  }
 
   "filter" should "work like List" in {
     val expect = MyList(2)
