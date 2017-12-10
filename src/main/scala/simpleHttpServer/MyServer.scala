@@ -11,7 +11,7 @@ class MyServer {
   def start(ss: ServerSocket) = {
     println("Waiting access...")
 
-    while(true) {
+    while (true) {
       val socket = ss.accept
 
       new Thread() {
@@ -26,18 +26,18 @@ class MyServer {
       in <- Using(socket.getInputStream)
       out <- Using(new BufferedOutputStream(socket.getOutputStream))
     } {
-      val request =  Request(in)
+      val request = Request(in)
       val response = Response(request)
 
       // formで送られてきたデータ確認用。
-      request.body.foreach{
-        case (k,v) => println(k + " => " + v)
+      request.body.foreach {
+        case (k, v) => println(k + " => " + v)
       }
 
       out.write(response.status.getResponseStatusLine)
       out.write(CRLF)
 
-      if(request.status.method == RequestMethod.Get || request.status.method == RequestMethod.Head){
+      if (request.status.method == RequestMethod.Get || request.status.method == RequestMethod.Head) {
         out.write(response.resource.getContentType)
         out.write(CRLF)
         out.write(response.resource.getContentLength)
@@ -48,7 +48,7 @@ class MyServer {
       out.write(CRLF)
       out.write(CRLF)
 
-      if(request.status.method == RequestMethod.Get){
+      if (request.status.method == RequestMethod.Get) {
         out.write(response.resource.content)
       }
 

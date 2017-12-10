@@ -7,9 +7,9 @@ import simpleHttpServer.utils.Conf.NOT_FOUND_PAGE
 import simpleHttpServer.utils.Conf.BASE_DIR
 
 case class Response(
-                     status: StatusCode,
-                     resource: Resource
-                   ) {
+    status: StatusCode,
+    resource: Resource
+) {
   def getServerName = "Server: MyServer".getBytes
 }
 
@@ -20,11 +20,14 @@ object Response {
     request.status.method match {
       case Get | Head => {
         getRequestResource(request.status) match {
-          case Some(resource) => new Response(StatusCode.OK,resource)
-          case None => new Response(StatusCode.NotFound, Resource(new File(NOT_FOUND_PAGE)))
+          case Some(resource) => new Response(StatusCode.OK, resource)
+          case None =>
+            new Response(StatusCode.NotFound,
+                         Resource(new File(NOT_FOUND_PAGE)))
         }
       }
-      case Post => new Response(StatusCode.OK,Resource(new File(NOT_FOUND_PAGE)))
+      case Post =>
+        new Response(StatusCode.OK, Resource(new File(NOT_FOUND_PAGE)))
       case Put => ???
       case Delete => ???
     }
@@ -34,16 +37,13 @@ object Response {
     // TODO ディレクトリ名で終わってもindex.htmlでもやる｡ 再帰的にやるといい｡
     val file = status.path match {
       case p if p.endsWith("/") => new File(BASE_DIR + p + "index.html")
-      case p  => new File(BASE_DIR + p)
+      case p => new File(BASE_DIR + p)
     }
 
-    if(file.exists) {
+    if (file.exists) {
       Some(Resource(file))
     } else {
       None
     }
   }
 }
-
-
-

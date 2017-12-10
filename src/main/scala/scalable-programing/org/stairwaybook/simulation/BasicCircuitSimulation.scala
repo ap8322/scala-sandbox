@@ -14,7 +14,7 @@ abstract class BasicCircuitSimulation extends Simulation {
     def setSignal(s: Boolean) =
       if (s != sigVal) {
         sigVal = s
-        actions foreach (_ ())
+        actions foreach (_())
       }
 
     def addAction(a: Action) = {
@@ -23,10 +23,10 @@ abstract class BasicCircuitSimulation extends Simulation {
     }
   }
 
-  def inverter(input:Write,output:Write) = {
+  def inverter(input: Write, output: Write) = {
     def invertAction() = {
       val inputSig = input.getSignal
-      afterDelay(InverterDelay){
+      afterDelay(InverterDelay) {
         output setSignal !inputSig
       }
     }
@@ -34,7 +34,7 @@ abstract class BasicCircuitSimulation extends Simulation {
     input addAction invertAction
   }
 
-  def andGate(a1: Write,a2: Write,output: Write) = {
+  def andGate(a1: Write, a2: Write, output: Write) = {
     def andAction() = {
       val a1Sig = a1.getSignal
       val a2Sig = a2.getSignal
@@ -43,26 +43,25 @@ abstract class BasicCircuitSimulation extends Simulation {
       }
     }
 
-      a1 addAction andAction
-      a2 addAction andAction
-    }
+    a1 addAction andAction
+    a2 addAction andAction
+  }
 
-  def orGate(o1: Write,o2: Write,output: Write) = {
+  def orGate(o1: Write, o2: Write, output: Write) = {
     def orAction() = {
       val o1Sig = o1.getSignal
       val o2Sig = o2.getSignal
-      afterDelay(OrGateDelay){
+      afterDelay(OrGateDelay) {
         output setSignal o1Sig | o1Sig
       }
     }
   }
 
-  def probe(name: String,write: Write) = {
-    def probeAction(): Unit ={
-      println(name + " "+ currentTime + " new-value =" + write.getSignal)
+  def probe(name: String, write: Write) = {
+    def probeAction(): Unit = {
+      println(name + " " + currentTime + " new-value =" + write.getSignal)
     }
 
     write addAction probeAction
   }
 }
-

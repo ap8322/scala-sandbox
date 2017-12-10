@@ -136,4 +136,3 @@
 //   // スコアをデータに反映させる｡
 //   def insert(corporateId: Long, jobs: Seq[JobDetailScore],isIndex: Boolean): Future[Int] = ???
 // }
-

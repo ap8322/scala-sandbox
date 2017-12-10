@@ -1,13 +1,24 @@
 // build.sbt
-scalaVersion := "2.11.8"
+scalaVersion := "2.12.4"
 
 name := "scala sandbox"
 
-scalacOptions ++= Seq("-deprecation", "-feature", "-unchecked", "-Xlint")
+scalacOptions ++= Seq(
+  "-deprecation",
+  "-feature",
+  "-unchecked",
+  "-Xlint",
+  "-Ywarn-dead-code",
+  "-Ywarn-numeric-widen",
+  "-Ywarn-unused",
+  "-Ywarn-unused-import",
+  "-Ywarn-value-discard"
+)
 
 libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "3.0.0" % "test",
-  "mysql" % "mysql-connector-java" % "6.0.6"
+  "mysql" % "mysql-connector-java" % "6.0.6",
+  "com.typesafe.slick" %% "slick" % "3.2.1"
   //"mysql" % "mysql-connector-java" % "5.1.40"
   //"mysql" % "mysql-connector-java" % "5.1.39"
 )

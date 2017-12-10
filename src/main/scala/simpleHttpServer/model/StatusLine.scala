@@ -1,9 +1,9 @@
 package simpleHttpServer.model
 
 case class StatusLine(
-  method: RequestMethod,
-  path: String,
-  version: String
+    method: RequestMethod,
+    path: String,
+    version: String
 )
 
 object StatusLine {
@@ -18,16 +18,16 @@ object StatusLine {
 
 sealed class RequestMethod(val value: String)
 
-object RequestMethod{
+object RequestMethod {
   case object Get extends RequestMethod("GET")
   case object Head extends RequestMethod("HEAD")
   case object Post extends RequestMethod("POST")
   case object Put extends RequestMethod("PUT")
   case object Delete extends RequestMethod("DELETE")
 
-  val values = Seq(Get,Head,Post,Put,Delete)
+  val values = Seq(Get, Head, Post, Put, Delete)
 
-  def apply(typeName: String):RequestMethod = {
+  def apply(typeName: String): RequestMethod = {
     values.find(_.value == typeName).getOrElse(throw new Exception)
   }
 }

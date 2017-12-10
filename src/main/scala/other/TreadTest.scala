@@ -1,6 +1,6 @@
 object TreadTest {
   def main(args: Array[String]) {
-    new Thread(){
+    new Thread() {
       override def run() = {
         for (i <- 1 to 10) {
           Thread.sleep(1000)

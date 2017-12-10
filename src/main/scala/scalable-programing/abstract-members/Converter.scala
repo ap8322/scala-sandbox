@@ -4,7 +4,6 @@
 object Converter {
 
   def exchangeRate = Map(
-  "USD" -> Map("USD" -> 1.0, "EUR" -> 0.7596,
-    "JPY" -> 1.211, "CHF" -> 1.223)
+    "USD" -> Map("USD" -> 1.0, "EUR" -> 0.7596, "JPY" -> 1.211, "CHF" -> 1.223)
   )
 }

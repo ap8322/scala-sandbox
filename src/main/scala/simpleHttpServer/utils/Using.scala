@@ -15,4 +15,3 @@ class Using[T <: Closeable](source: T) {
 object Using {
   def apply[T <: Closeable](source: T) = new Using(source)
 }
-

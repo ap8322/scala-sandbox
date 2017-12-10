@@ -1,6 +1,7 @@
 package _25
 
-class RNA1 private (val groups: Array[Int],val length: Int) extends IndexedSeq[Base]{
+class RNA1 private (val groups: Array[Int], val length: Int)
+    extends IndexedSeq[Base] {
   import RNA1._
   def apply(idx: Int): Base = {
     if (idx < 0 || length <= idx) throw new IndexOutOfBoundsException
@@ -16,7 +17,7 @@ object RNA1 {
     val groups = new Array[Int]((buf.length + N - 1) / N)
     for (i <- buf.indices)
       groups(i / N) |= Base.toInt(buf(i)) << (i % N * S)
-    new RNA1(groups,buf.length)
+    new RNA1(groups, buf.length)
   }
   def apply(bases: Base*) = fromSeq(bases)
 }
